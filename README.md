@@ -120,168 +120,24 @@ A thorough explanation of each dataset can be seen below, for a shortened versio
 </table>
 
 
-## Thorough description of each dataset directory
-
-1-onek1k_raw_noresample_50pcmiss: first dataset in which the model was trained, Anndata from OneK1K cohort was downloaded and parsed through the preprocessing script.
+## Thorough description of the steps followed in order to get each dataset
 
 - Main processing steps for expression data:
 
     - Cell type prediction confidence threshold: 50%
 
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,248,980      | 193,210      |1,055,770     |
 
     - Selection of top 19 most common cells:
 
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,055,770      | 3,535      |1,052,235     |
 
     - Pivoting of table, filtering of non-coding genes:
 
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |36,571      | 17,599      |18,972     |
-
-    - Threshold of missing values: 50%
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |18,972      | 13,812      |5,160     |
-
-    - Extraction of top 295 most variable genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |5,160      | 4,865      |295     |
-
-- Main processing steps for gene and cell type ordering:
-
-    - Cells ordered by phylogeny, genes ordered by STRING interaction representation.
-
-- Main processing steps for metadata:
-
-    - Sex was binary coded and agebins were created 0 to 3 with the following criteria: agebin0 $\le$ 54 | 55 $\le$ agebin1 $\le$ 64 | 65 $\le$ agebin2 $\le$ 74 | 75 $\le$ agebin3
-
-2-onek1k_raw_noresample_40pcmiss: this dataset is similar to number 1 in essence, however a filter slighly more restrictive was used for missing values.
-
-- Main processing steps for expression data:
-
-    - Cell type prediction confidence threshold: 50%
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,248,980      | 193,210      |1,055,770     |
-
-    - Selection of top 19 most common cells:
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,055,770      | 3,535      |1,052,235     |
-
-    - Pivoting of table, filtering of non-coding genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |36,571      | 17,599      |18,972     |
 
     - Threshold of missing values: 40%
 
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |18,972      | 15,399      |3,573     |
 
     - Extraction of top 295 most variable genes:
 
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |3,573      | 3,278      |295     |
-
-- Main processing steps for gene and cell type ordering:
-
-    - Cells ordered by phylogeny, genes ordered by STRING interaction representation.
-
-- Main processing steps for metadata:
-
-    - Sex was binary coded and agebins were created 0 to 3 with the following criteria: agebin0 $\le$ 54 | 55 $\le$ agebin1 $\le$ 64 | 65 $\le$ agebin2 $\le$ 74 | 75 $\le$ agebin3
-
-3-onek1k_raw_nosexresample_40pcmiss: preprocessing of the data was done similarly to number 2. However, a resampling with replacement method was used in order to bump each agebin to 200 samples (independent of sex). The replacement was done with 50% of each sex for whole individuals not to break possible relationship between expression values.
-
-- Main processing steps for expression data:
-
-    - Cell type prediction confidence threshold: 50%
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,248,980      | 193,210      |1,055,770     |
-
-    - Selection of top 19 most common cells:
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,055,770      | 3,535      |1,052,235     |
-
-    - Pivoting of table, filtering of non-coding genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |36,571      | 17,599      |18,972     |
-
-    - Threshold of missing values: 40%
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |18,972      | 15,399      |3,573     |
-
-    - Extraction of top 295 most variable genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |3,573      | 3,278      |295     |
-
-- Main processing steps for gene and cell type ordering:
-
-    - Cells ordered by phylogeny, genes ordered by STRING interaction representation.
-
-- Main processing steps for metadata:
-
-    - Sex was binary coded and agebins were created 0 to 3 with the following criteria: agebin0 $\le$ 54 | 55 $\le$ agebin1 $\le$ 64 | 65 $\le$ agebin2 $\le$ 74 | 75 $\le$ agebin3
-    - Resampling was done with replacement to get, at least 200 samples of each agebin (independently of sex, 200 total).
-
-4- onek1k_raw_sexresample_40pcmiss: data similar to number 3. However, during resampling with replacement, independency of sex was taken, so each sex AND agebin are resampled to 200 samples. The replacement was done for whole individuals not to break possible relationship between expression values.
-
-- Main processing steps for expression data:
-
-    - Cell type prediction confidence threshold: 50%
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,248,980      | 193,210      |1,055,770     |
-
-    - Selection of top 19 most common cells:
-
-        |Observations before| Filtered|Observations after|
-        |:---:           |          :---:  |        :---:  |
-        |1,055,770      | 3,535      |1,052,235     |
-
-    - Pivoting of table, filtering of non-coding genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |36,571      | 17,599      |18,972     |
-
-    - Threshold of missing values: 40%
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |18,972      | 15,399      |3,573     |
-
-    - Extraction of top 295 most variable genes:
-
-        |Genes before| Filtered|Genes after|
-        |:---:           |          :---:  |        :---:  |
-        |3,573      | 3,278      |295     |
 
 - Main processing steps for gene and cell type ordering:
 
