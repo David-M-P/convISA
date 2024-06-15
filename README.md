@@ -1,12 +1,13 @@
 # convISA
 
 Welcome to convISA! A project in Bioinformatics done by David Martín Pestaña. This README file will contain all the information needed for the data format as well as to run the framework.
+For the full project report PDF, it can be accessed in this same directory.
 
 ## Format of example_data directories
 
-Feeding data to the neural network can be done only in one format, but the way that we preprocess data previous to this can hugely impact the rest of the process. One idea to use these example datasets is to copy the three csv files into a directory trials/TRIAL_NAME/assets. After that, if a config file is present in the base trial directory, the program can be run by using the single bash command with the selected trial name.
+Feeding data to the neural network can be done only in one format, but the way that we preprocess data previous to this can hugely impact the rest of the process. The network runs as long as there is a directory with a particular name inside of "trials" (as by default only example_trial is there). The directory should have a "config.json" file and an "assets" subdirectory in which the three files needed to run the framework will be.
 
-For each subdirectory in example_data, there will be a folder "scripts" that holds the python script used to create the data, as well as 3 files:
+Each of the 3 files in assets directory should be:
 
 - metadata.csv: Will contain 3 columns and it is used as an index for the donor ids and their corresponding sex and agebin. The structure is:
 
@@ -29,121 +30,36 @@ For each subdirectory in example_data, there will be a folder "scripts" that hol
     |gene1_celltype1  | name of gene 1      | name of celltype 1  | index of cell type 1| index of gene 1|
     |geneN_celltypeN  | name of gene N      | name of celltype N  | index of cell type N| index of gene N|
 
-## Index of directories
-
-The following index is built in order of creation of datasets during the duration of the project:
-
 > Note before: One observation means one expression value per cell type, gene and patient. After a certain step the table is pivoted and instead of observations, genes in donor+cell combination are filtered. 
 
-A thorough explanation of each dataset can be seen below, for a shortened version, an overview of each preprocessing workflow can be seen in the following table.
+## Description on how to run ConvISA.
 
-<table align="center">
-    <thead>
-        <tr>
-            <th style="text-align:center;"><b>csv file</b></th>
-            <th style="text-align:center;"><b>Step</b></th>
-            <th style="text-align:center;"><b>Index: 1</b></th>
-            <th style="text-align:center;"><b>Index: 2</b></th>
-            <th style="text-align:center;"><b>Index: 3</b></th>
-            <th style="text-align:center;"><b>Index: 4</b></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align:center;"><b>Name</b></td>
-            <td style="text-align:center;">Name</td>
-            <td style="text-align:center;">Name</td>
-            <td style="text-align:center;">Name</td>
-            <td style="text-align:center;">Name</td>
-            <td style="text-align:center;">Name</td>
-        </tr>
-        <tr>
-            <td rowspan=4 style="text-align:center;"><b>Expression</b></td>
-            <td style="text-align:center;">Type Prediction Thr</td>
-            <td style="text-align:center;">50%</td>
-            <td style="text-align:center;">50%</td>
-            <td style="text-align:center;">50%</td>
-            <td style="text-align:center;">50%</td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">Missing thr</td>
-            <td style="text-align:center;">50%</td>
-            <td style="text-align:center;">40%</td>
-            <td style="text-align:center;">40%</td>            
-            <td style="text-align:center;">40%</td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">Cell number</td>
-            <td style="text-align:center;">19</td>
-            <td style="text-align:center;">19</td>
-            <td style="text-align:center;">19</td>
-            <td style="text-align:center;">19</td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">Gene number</td>
-            <td style="text-align:center;">295</td>
-            <td style="text-align:center;">295</td>
-            <td style="text-align:center;">295</td>
-            <td style="text-align:center;">295</td>
-        </tr>
-        <tr>
-            <td rowspan=2 style="text-align:center;"><b>Order</b></td>
-            <td style="text-align:center;">Cells by</td>
-            <td style="text-align:center;">Common + Pylogeny</td>
-            <td style="text-align:center;">Common + Pylogeny</td>
-            <td style="text-align:center;">Common + Pylogeny</td>
-            <td style="text-align:center;">Common + Pylogeny</td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">Gene by</td>
-            <td style="text-align:center;">Variable + STRING</td>
-            <td style="text-align:center;">Variable + STRING</td>
-            <td style="text-align:center;">Variable + STRING</td>
-            <td style="text-align:center;">Variable + STRING</td>
-        </tr>
-        <tr>
-            <td rowspan=2 style="text-align:center;"><b>Metadata</b></td>
-            <td style="text-align:center;">Data</td>
-            <td style="text-align:center;">Average per gene+ctype</td>
-            <td style="text-align:center;">Average per gene+ctype</td>
-            <td style="text-align:center;">Average per gene+ctype</td>
-            <td style="text-align:center;">Average per gene+ctype</td>
-        </tr>
-        <tr>
-            <td style="text-align:center;">Resampling</td>
-            <td style="text-align:center;">No</td>
-            <td style="text-align:center;">No</td>
-            <td style="text-align:center;">Sex independent to 200</td>
-            <td style="text-align:center;">Sex dependent to 200</td>
-        </tr>
-    </tbody>
-</table>
-
+In order to run ConvISA, place the full repository in an HPC cluster with SLURM queuing system, the conda environment can be directly installed from the environment.yaml file in the repository. Then, job_cluster.sh has to be modified in every place that says "REPLACE" (suggested to do Ctrl+Find in the file with "REPLACE" as 4 parameters are to be changed with the cluster username, project/job name and directory). Once done that, navigate to convisa/src and run the bash command "sbatch run_cluster.sh $trial_name" (trial_name should be a directory with a valid structure as mentioned before). If everything is valid a job will be sent for queue in a GPU node and it will be run.
 
 ## Thorough description of the steps followed in order to get each dataset
 
-- Main processing steps for expression data:
+- Main processing steps for expression data
 
     - Cell type prediction confidence threshold: 50%
 
 
-    - Selection of top 19 most common cells:
+    - Selection of top 19 most common cells
 
 
-    - Pivoting of table, filtering of non-coding genes:
+    - Pivoting of table, filtering of non-coding genes
 
 
     - Threshold of missing values: 40%
 
 
-    - Extraction of top 295 most variable genes:
+    - Extraction of top 295 most variable genes
 
 
 - Main processing steps for gene and cell type ordering:
 
     - Cells ordered by phylogeny, genes ordered by STRING interaction representation.
 
-- Main processing steps for metadata:
+- Main processing steps for metadata
 
     - Sex was binary coded and agebins were created 0 to 3 with the following criteria: agebin0 $\le$ 54 | 55 $\le$ agebin1 $\le$ 64 | 65 $\le$ agebin2 $\le$ 74 | 75 $\le$ agebin3
     - Resampling was done with replacement to get, at least 200 samples of each agebin and sex.
