@@ -1,6 +1,6 @@
-# convISA
+# Conv-ISA (Convolutions for Inference of Sex and Age)
 
-Welcome to convISA! A project in Bioinformatics done by David Martín Pestaña. This README file will contain all the information needed for the data format as well as to run the framework.
+Welcome to convISA! A project in Bioinformatics done by David Martín Pestaña during Spring 2024. This README file will contain all the information needed for the data format as well as to run the framework.
 For the full project report PDF, it can be accessed in this same directory.
 
 ## Format of example_data directories
