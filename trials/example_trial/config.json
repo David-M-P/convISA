@@ -1,0 +1,73 @@
+{
+    "_basic_settings": "Choose the settings for the framework",
+    "train_for_age/sex": "sex",
+    "hyperparameter_optimization_yes/no": "yes",
+    "separate_males_females_yes/no": "no",
+    "_optimization_settings": "Choose the settings for the hyperparameter optimization",
+    "max_lr_decrease_start": 30,
+    "min_lr_decrease_start": 15,
+    "max_lr_decay": 1e-4,
+    "min_lr_decay": 1e-7,
+    "max_weight_decay": 1e-5,
+    "min_weight_decay": 1e-8,
+    "max_lr": 1e-3,
+    "min_lr": 1e-6,
+    "max_batch_size": 300,
+    "min_batch_size": 64,
+    "max_dropout_ext": 0.5,
+    "min_dropout_ext": 0.15,
+    "max_dropout_pred": 0.5,
+    "min_dropout_pred": 0.15,
+    "max_train_pct": 0.65,
+    "min_train_pct": 0.5,
+    "max_patience": 10,
+    "min_patience": 5,
+    "scale1": [
+        4,
+        8,
+        16
+    ],
+    "scale2": [
+        1,
+        2,
+        4
+    ],
+    "scale3": [
+        1,
+        2,
+        4
+    ],
+    "scale4": [
+        2,
+        4,
+        8,
+        16
+    ],
+    "ext_scale": [
+        8,
+        16,
+        32,
+        64
+    ],
+    "number_of_optimization_trials": 400,
+    "number_of_epochs": 200,
+    "_hardcodedsettings": "Settings used if not using Optuna for hyperparameter optimization",
+    "batch_size": 100,
+    "loss_jitter_yes_no": "no",
+    "lr": 0.00022422969059939866,
+    "lr_decay": 1.7568191998883875e-05,
+    "lr_decrease_start": 16,
+    "optimizer": "Adagrad",
+    "p_drop_ext": 0.0736137495250553,
+    "p_drop_pred": 0.2276133965490285,
+    "patience": 7,
+    "train_pct": 0.6138620417084004,
+    "params_weight_decay": 7.559406551925009e-06,
+    "trainer_binary/multi-class": "multi-class",
+    "attribution_n_steps": 10,
+    "fixed_scale1": 16,
+    "fixed_scale2": 2,
+    "fixed_scale3": 2,
+    "fixed_scale4": 8,
+    "fixed_ext_scale": 16
+}
